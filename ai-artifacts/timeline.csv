@@ -1,0 +1,23 @@
+time_utc,frame,source,src_ip,dst_ip,event,evidence
+2017-06-27 13:38:32.435,2,pcap,192.168.1.1,192.168.1.96,DNS response: matied.com -> 119.28.70.207 (first activity in capture),08-first-packet.png
+2017-06-27 13:38:32.652,6,pcap,192.168.1.96,119.28.70.207,"HTTP GET matied.com/gerv.gun; User-Agent WinHttp.WinHttpRequest.5 (script downloader, not a browser)",10-winhttp-useragent.png
+2017-06-27 13:38:34.111,-,Snort,119.28.70.207,192.168.1.96,FILE-EXECUTABLE Portable Executable binary file magic detected (sid 15306) / download of executable content (sid 11192),04-snort-log-filter.png
+2017-06-27 13:38:34,-,Suricata,119.28.70.207,192.168.1.96,ET POLICY PE EXE or DLL Windows file download (logged as 2017-06-28 00:14:33 - sensor clock ~+10h36m),05-suricata-log-filter.png
+2017-06-27 13:38:36.765,204,pcap,119.28.70.207,192.168.1.96,"HTTP 200 application/octet-stream, 241664 bytes - gerv.gun is a PE32 executable (stage 1)",11-http-object-export-files.png
+2017-06-27 13:40:52.379,213,pcap,192.168.1.96,255.255.255.255,DHCP Inform: hostname FlashGordon-PC / MAC 00:15:c5:de:c7:3b / IP 192.168.1.96,06-dhcp-from-suspect-ip.png
+2017-06-27 13:43:49.212,221,pcap,192.168.1.96,255.255.255.255,Second DHCP Inform (same host identity),06-dhcp-from-suspect-ip.png
+2017-06-27 13:43:50.010,294,pcap,192.168.1.1,192.168.1.96,DNS response: centler.at -> 119.28.70.207 (same IP as matied.com),09-http-request-event-order.png
+2017-06-27 13:43:50.223,298,pcap,192.168.1.96,119.28.70.207,HTTP POST centler.at/auth/ajax/847598782/?min=data -> 302 redirect,09-http-request-event-order.png
+2017-06-27 13:43:51.070,304,pcap,192.168.1.96,119.28.70.207,HTTP POST centler.at/auth/min/828949448/ -> 302 redirect,09-http-request-event-order.png
+2017-06-27 13:43:52.243,313,pcap,192.168.1.96,145.131.10.21,HTTP GET lounge-haarstudio.nl/oud/trow.exe (330752 bytes PE32 returned in frame 656),09-http-request-event-order.png
+2017-06-27 13:43:54.128,667,pcap,192.168.1.96,143.95.151.192,HTTP GET vantagepointtechnologies.com/wp.exe (307712 bytes PE32 returned in frame 855),09-http-request-event-order.png
+2017-06-27 13:43:54.128,-,Snort,192.168.1.96,143.95.151.192,MALWARE-CNC Win.Trojan.Kazy variant outbound connection (sid 28406) on wp.exe request,04-snort-log-filter.png
+2017-06-27 13:43:58.715,866,pcap,192.168.1.96,59.106.164.230,HTTP GET rts21.co.jp/img/t64.bin (3162369 bytes; not a PE - encrypted/encoded data),09-http-request-event-order.png
+2017-06-27 13:44:01.381,1423,pcap,192.168.1.96,many,"Start of Pushdo check-in burst: 637 POST / requests, IE6 User-Agent, 302 hosts in 41 s",19-decoy-requests-to-hide-c2.png
+2017-06-27 13:44:01-13:44:42,-,pcap,192.168.1.96,many,I/O graph spike (~6k packets/10s) coincides with burst; no periodic beaconing to 119.28.70.207,17-io-graph.png
+2017-06-27 13:44:01-13:44:13,-,Suricata,various,192.168.1.96,Sinkhole indicators: Sinkhole.tech reply (144.217.254.90); Fitsec sinkhole IP (193.166.255.171); sinkhole cookie Snkz (212.61.180.100),05-suricata-log-filter.png
+2017-06-27 13:44:11.814,5478,pcap,192.168.1.96,192.168.1.1,First .ru DNS lookups (mxs.mail.ru; sledsport.ru; notis.ru; shztm.ru ...); Snort sid 15168 fires from 13:44:11.994,20-ru-domain-lookups.png
+2017-06-27 13:44:11.850,5490,pcap,192.168.1.96,157.112.145.19,First outbound SMTP (TCP/25) connection - 475 SYNs to 155 mail servers by end of capture (spam-bot behaviour),18-mail-servers-spam.png
+2017-06-27 13:44:11.994-13:44:42.004,-,Snort,192.168.1.96,202 dest IPs,498x MALWARE-CNC Win.Trojan.Pushdo variant outbound connection (sid 29891),04-snort-log-filter.png
+2017-06-27 13:44:00-13:44:42,-,Suricata,192.168.1.96,292 dest IPs,823x ET TROJAN Backdoor.Win32.Pushdo.s Checkin (logged 2017-06-28 00:20:00-00:20:42),05-suricata-log-filter.png
+2017-06-27 13:44:42.408,17239,pcap,-,-,End of capture (activity still ongoing - capture truncated),01-capture-properties.png
